@@ -7,6 +7,15 @@
  * Author: Geoffroy Colpart
  */
 
+use Diconais\Container\Container;
+use Diconais\Plugin;
+
 if (!defined('ABSPATH')) exit;
 
 require_once __DIR__ . '/vendor/autoload.php';
+
+$container = new Container;
+
+$plugin = Plugin::get_instance();
+
+$plugin->boot();
