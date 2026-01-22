@@ -34,6 +34,13 @@ class Container
         return $this;
     }
 
+    /**
+     * register
+     *
+     * @param  string $name
+     * @param  mixed $factory
+     * @return self
+     */
     public function register(string $name, mixed $factory): self
     {
         $this->services[$name] = $factory;
@@ -41,6 +48,12 @@ class Container
         return $this;
     }
 
+    /**
+     * get
+     *
+     * @param  string $name
+     * @return mixed
+     */
     public function get(string $name): mixed
     {
         if (isset($this->resolved[$name])) {
@@ -61,6 +74,12 @@ class Container
         return $this->resolved[$name];
     }
 
+    /**
+     * has
+     *
+     * @param  string $name
+     * @return bool
+     */
     public function has(string $name): bool
     {
         return isset($this->services[$name]);
