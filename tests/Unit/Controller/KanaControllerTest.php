@@ -6,6 +6,7 @@ use Mockery;
 use Brain\Monkey;
 use PHPUnit\Framework\TestCase;
 use Diconais\Core\PostTypeFactory;
+use Diconais\Core\TaxonomyFactory;
 use Diconais\Controller\KanaController;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
@@ -24,6 +25,12 @@ class KanaControllerTest extends TestCase
         Monkey\tearDown();
         parent::tearDown();
     }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Post type
+     * -------------------------------------------------------------------------
+     */
 
     /**
      * testLoadRegistersPostTypeWhenFactoryIsSet
@@ -115,6 +122,31 @@ class KanaControllerTest extends TestCase
 
         $controller = (new KanaController())
             ->setPostTypeFactory($mockFactory);
+
+        $controller->load();
+
+        $this->assertInstanceOf(KanaController::class, $controller);
+    }
+
+    /**
+     * -------------------------------------------------------------------------
+     * Taxonomy
+     * -------------------------------------------------------------------------
+     */
+
+    public function testFullWorkflowForTaxonomy(): void
+    {
+        $mockFactory = Mockery::mock(TaxonomyFactory::class);
+        $mockFactory->shouldReceive('set')
+            ->once()
+            ->with('dn_kana_type', Mockery::type('array'), Mockery::type('array'))
+            ->andReturnSelf();
+
+        $mockFactory->shouldReceive('hook')
+            ->once()
+            ->andReturnNull();
+
+        $controller = (new KanaController())->setTaxonomyFactory($mockFactory);
 
         $controller->load();
 

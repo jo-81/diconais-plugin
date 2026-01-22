@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'env' => 'production',
+    'env'     => 'production',
     'service' => fn () => true,
 ];

@@ -17,7 +17,12 @@ return (new PhpCsFixer\Config())
         'no_unused_imports' => true,
         'single_quote' => true,
         'concat_space' => ['spacing' => 'one'],
-        'binary_operator_spaces' => ['default' => 'single_space'],
+        'binary_operator_spaces' => [
+            'default' => 'single_space',
+            'operators' => [
+                '=>' => 'align_single_space_minimal',
+            ],
+        ],
         'trailing_comma_in_multiline' => ['elements' => ['arrays']],
         'blank_line_before_statement' => [
             'statements' => ['return', 'throw', 'try'],
