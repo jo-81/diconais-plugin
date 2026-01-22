@@ -2,9 +2,9 @@
 
 namespace Tests\Diconais\Unit;
 
+use PHPUnit\Framework\TestCase;
 use Diconais\Container\Container;
 use Diconais\Container\Exception\NotFoundException;
-use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase
 {
