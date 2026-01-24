@@ -28,7 +28,7 @@ class KanaTypeTaxonomy
         ];
 
         return [
-            'hierarchical'      => false,
+            'hierarchical'      => true,
             'labels'            => $labels,
             'show_in_menu'      => true,
             'show_admin_column' => true,
