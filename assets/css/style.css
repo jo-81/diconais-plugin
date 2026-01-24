@@ -1,0 +1,25 @@
+.dn-form-group:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.dn-form-label {
+    font-weight: bold;
+    display: block;
+    margin: 3px;
+}
+
+input[type="checkbox"] + label {
+    font-weight: bold;
+}
+
+.dn-form-help {
+    display: block;
+    margin-top: 3px;
+}
+
+.dn-form-error {
+    display: block;
+    color: red;
+    font-weight: 600;
+    margin-top: 3px;
+}
