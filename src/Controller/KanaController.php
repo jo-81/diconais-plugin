@@ -6,6 +6,7 @@ use Diconais\Inc\PostType\KanaPostType;
 use Diconais\Abstract\AbstractController;
 use Diconais\Inc\Metabox\Kana\KanaMetabox;
 use Diconais\Inc\Taxonomy\KanaTypeTaxonomy;
+use Diconais\Inc\AdminColumn\Kana\KanaAdminColumn;
 
 class KanaController extends AbstractController
 {
@@ -26,6 +27,10 @@ class KanaController extends AbstractController
 
         if ($this->metaboxFactory) {
             $this->registerMetabox();
+        }
+
+        if ($this->adminColumnFactory) {
+            $this->registerAdminColum();
         }
     }
 
@@ -58,5 +63,14 @@ class KanaController extends AbstractController
     {
         $metabox = $this->metaboxFactory->create(KanaMetabox::class);
         $metabox->hook();
+    }
+
+    public function registerAdminColum(): void
+    {
+        $columnFactory = $this->adminColumnFactory->create(KanaAdminColumn::class);
+        $columnFactory
+            ->columns()
+            ->sortable()
+        ;
     }
 }
