@@ -23,3 +23,21 @@ input[type="checkbox"] + label {
     font-weight: 600;
     margin-top: 3px;
 }
+
+.dn_badge {
+    display: inline-block;
+    padding: 2px 6px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.dn_badge.dn_is_true {
+    background-color: aquamarine;
+}
+
+.dn_badge.dn_is_false {
+    background-color: crimson;
+    color: white;
+}

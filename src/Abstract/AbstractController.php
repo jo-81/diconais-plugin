@@ -6,6 +6,7 @@ use Diconais\Core\PostTypeFactory;
 use Diconais\Core\TaxonomyFactory;
 use Diconais\Core\Metabox\MetaboxFactory;
 use Diconais\Interface\ControllerInterface;
+use Diconais\Core\AdminColumn\AdminColumnFactory;
 
 abstract class AbstractController implements ControllerInterface
 {
@@ -14,6 +15,8 @@ abstract class AbstractController implements ControllerInterface
     protected ?TaxonomyFactory $taxonomyFactory = null;
 
     protected ?MetaboxFactory $metaboxFactory = null;
+
+    protected ?AdminColumnFactory $adminColumnFactory = null;
 
     public function load(): void
     {
@@ -54,6 +57,19 @@ abstract class AbstractController implements ControllerInterface
     public function setMetaboxFactory(MetaboxFactory $metaboxFactory): self
     {
         $this->metaboxFactory = $metaboxFactory;
+
+        return $this;
+    }
+
+    /**
+     * setAdminColumnFactory
+     *
+     * @param  AdminColumnFactory $adminColumnFactory
+     * @return self
+     */
+    public function setAdminColumnFactory(AdminColumnFactory $adminColumnFactory): self
+    {
+        $this->adminColumnFactory = $adminColumnFactory;
 
         return $this;
     }
