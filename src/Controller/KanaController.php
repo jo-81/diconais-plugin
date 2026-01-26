@@ -3,6 +3,7 @@
 namespace Diconais\Controller;
 
 use Diconais\Inc\PostType\KanaPostType;
+use Diconais\Inc\Filter\Kana\KanaFilter;
 use Diconais\Abstract\AbstractController;
 use Diconais\Inc\Metabox\Kana\KanaMetabox;
 use Diconais\Inc\Taxonomy\KanaTypeTaxonomy;
@@ -10,30 +11,6 @@ use Diconais\Inc\AdminColumn\Kana\KanaAdminColumn;
 
 class KanaController extends AbstractController
 {
-    /**
-     * load
-     *
-     * @return void
-     */
-    public function load(): void
-    {
-        if ($this->postTypeFactory) {
-            $this->registerPostType();
-        }
-
-        if ($this->taxonomyFactory) {
-            $this->registerTaxonomy();
-        }
-
-        if ($this->metaboxFactory) {
-            $this->registerMetabox();
-        }
-
-        if ($this->adminColumnFactory) {
-            $this->registerAdminColum();
-        }
-    }
-
     /**
      * registerPostType
      *
@@ -64,13 +41,32 @@ class KanaController extends AbstractController
         $metabox = $this->metaboxFactory->create(KanaMetabox::class);
         $metabox->hook();
     }
-
-    public function registerAdminColum(): void
+    
+    /**
+     * registerAdminColumn
+     *
+     * @return void
+     */
+    public function registerAdminColumn(): void
     {
         $columnFactory = $this->adminColumnFactory->create(KanaAdminColumn::class);
         $columnFactory
             ->columns()
             ->sortable()
+        ;
+    }
+    
+    /**
+     * registerFilter
+     *
+     * @return void
+     */
+    public function registerFilter(): void
+    {
+        $filterFactory = $this->FilterFactory->create(KanaFilter::class);
+        $filterFactory
+            ->hookTaxonomies()
+            ->hookFilterPostMetas()
         ;
     }
 }

@@ -4,6 +4,7 @@ namespace Diconais\Abstract;
 
 use Diconais\Core\PostTypeFactory;
 use Diconais\Core\TaxonomyFactory;
+use Diconais\Core\Filter\FilterFactory;
 use Diconais\Core\Metabox\MetaboxFactory;
 use Diconais\Interface\ControllerInterface;
 use Diconais\Core\AdminColumn\AdminColumnFactory;
@@ -18,8 +19,24 @@ abstract class AbstractController implements ControllerInterface
 
     protected ?AdminColumnFactory $adminColumnFactory = null;
 
+    protected ?FilterFactory $FilterFactory = null;
+
     public function load(): void
     {
+        $reflection = new \ReflectionClass($this);
+        $properties = $reflection->getProperties();
+
+        foreach ($properties as $property) {
+            if (is_null($property->getValue($this))) {
+                continue;
+            }
+
+            $name = str_replace('Factory', '', $property->getName());
+            $registerMethod = 'register' . ucfirst($name);
+            if (method_exists($this, $registerMethod)) {
+                $this->$registerMethod();
+            }
+        }
     }
 
     /**
@@ -70,6 +87,19 @@ abstract class AbstractController implements ControllerInterface
     public function setAdminColumnFactory(AdminColumnFactory $adminColumnFactory): self
     {
         $this->adminColumnFactory = $adminColumnFactory;
+
+        return $this;
+    }
+
+    /**
+     * setFilterFactory
+     *
+     * @param  FilterFactory $FilterFactory
+     * @return self
+     */
+    public function setFilterFactory(FilterFactory $FilterFactory): self
+    {
+        $this->FilterFactory = $FilterFactory;
 
         return $this;
     }
